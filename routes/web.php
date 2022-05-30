@@ -5,6 +5,7 @@ use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,30 +17,22 @@ use App\Http\Controllers\ListingController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/',[ListingController::class,'index']);
-
-Route::get('/listings/create',[ListingController::class,'create'])->middleware('auth');
-
-Route::post('/listings',[ListingController::class,'store']);
-
-Route::get('/listings/{listing}/edit',[ListingController::class,'edit'])->middleware('auth');
-
-Route::put('/listings/{listing}',[ListingController::class,'update'])->middleware('auth');
-
-Route::delete('/listings/{listing}',[ListingController::class,'delete'])->middleware('auth');
-
-Route::get('listings/manage',[ListingController::class,'manage'])->middleware('auth');
-
-Route::get('/listings/{listing}',[ListingController::class,'show']);
-
-Route::get('/register',[UserController::class,'register'])->middleware('guest');
-
-Route::post('/users',[UserController::class,'store']);
-
-Route::post('/logout',[UserController::class,'logout']);
+Route::middleware('auth')->group(function () {
+    Route::get('/listings/create',[ListingController::class,'create']);
+    Route::get('/listings/{listing}/edit',[ListingController::class,'edit']);
+    Route::put('/listings/{listing}',[ListingController::class,'update'])->name('listing.update');
+    Route::delete('/listings/{listing}',[ListingController::class,'delete'])->name('listing.delete');
+    Route::get('listings/manage',[ListingController::class,'manage']);
+    Route::put('/account/update',[UserController::class,'update'])->name('account.update');
+    Route::get('/account',[UserController::class,'account']);
+});
 
 Route::get('/login',[UserController::class,'login'])->name('login')->middleware('guest');
-
+Route::get('/register',[UserController::class,'register'])->middleware('guest');
+Route::get('/',[ListingController::class,'index']);
+Route::post('/listings',[ListingController::class,'store']);
+Route::get('/listings/{listing}',[ListingController::class,'show']);
+Route::post('/users',[UserController::class,'store']);
+Route::post('/logout',[UserController::class,'logout']);
 Route::post('/users/authenticate',[UserController::class,'authenticate']);
 
