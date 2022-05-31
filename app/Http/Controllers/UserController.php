@@ -81,6 +81,8 @@ class UserController extends Controller
 
         Auth::user()->update($accountFields);
 
-        return back()->with('message','Account updated successfully');
+        $this->logout($request);
+        
+        return redirect('/login')->with('message','Account updated successfully');
     }
 }

@@ -7,7 +7,7 @@
         <p class="mb-4">Log into your account to post gigs</p>
     </header>
 
-    <form method="POST" action="/users/authenticate">
+    <form method="POST" action="{{ route('user.login') }}">
         @csrf
 
         <div class="mb-6">

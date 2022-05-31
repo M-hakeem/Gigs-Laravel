@@ -22,7 +22,8 @@ class Listing extends Model
             $query->where('title', 'like' , '%' . request('search') . '%' )
             ->orwhere('title', 'like' , '%' . request('search') . '%' )
             ->orwhere('description', 'like' , '%' . request('search') . '%' )
-            ->orwhere('tags', 'like' , '%' . request('search') . '%' );
+            ->orwhere('tags', 'like' , '%' . request('search') . '%' )
+            ->orwhere('company', 'like' , '%' . request('search') . '%' );
         }
     }
 
