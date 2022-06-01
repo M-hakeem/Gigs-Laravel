@@ -54,7 +54,7 @@
         <div class="mt-8">
             <p>
                 Dont have an account?
-                <a href="/register" class="text-laravel"
+                <a href="{{ route('register') }}" class="text-laravel"
                     >Register</a
                 >
             </p>
