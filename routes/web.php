@@ -18,8 +18,8 @@ use GuzzleHttp\Middleware;
 |
 */
 Route::middleware('auth')->group(function () {
-    Route::get('/listings/create',[ListingController::class,'create']);
-    Route::post('/listings',[ListingController::class,'store'])->name('listing.create');
+    Route::get('/listings/create',[ListingController::class,'create'])->name('listing.create');
+    Route::post('/listings',[ListingController::class,'store'])->name('listing.store');
     Route::get('/listings/{listing}/edit',[ListingController::class,'edit']);
     Route::put('/listings/{listing}',[ListingController::class,'update'])->name('listing.update');
     Route::delete('/listings/{listing}',[ListingController::class,'delete'])->name('listing.delete');
@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account',[UserController::class,'account']);
 });
 
-Route::get('/login',[UserController::class,'login'])->middleware('guest');
+Route::get('/login',[UserController::class,'login'])->name('login')->middleware('guest');
 Route::get('/register',[UserController::class,'register'])->middleware('guest');
 Route::get('/',[ListingController::class,'index']);
 Route::get('/listings/{listing}',[ListingController::class,'show']);

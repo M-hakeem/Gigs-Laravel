@@ -7,7 +7,7 @@
     <p class="mb-4">Post a gig to find a developer</p>
 </header>
 
-<form method="POST" action="{{ route('listing.create') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('listing.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-6">
         <label
